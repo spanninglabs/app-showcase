@@ -61,7 +61,9 @@ async function main() {
 
   console.log("\nCurrent NFT balances:")
   for (let i = 0; i < airdropAddresses.length; i++) {
-    let bal = await contract.balanceOf(airdropAddresses[i]);
+    // Note: we must specify ['balanceOf(bytes32)'] as oppose to
+    // calling `.balanceOf` because it is an overridden function
+    let bal = await contract['balanceOf(bytes32)'](airdropAddresses[i]);
     console.log(`${i + 1}. ${airdropAddresses[i]}: ${bal}`);
   }
 
