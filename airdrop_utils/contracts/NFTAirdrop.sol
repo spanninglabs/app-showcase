@@ -2,15 +2,17 @@
 pragma solidity ^0.8.4;
 
 import "hardhat/console.sol";
-import "@spanning/contracts/utils/Counters.sol";
-import "@spanning/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+import "@spanning/contracts/SpanningUtils.sol";
+import "@spanning/contracts/token/ERC721/SpanningERC721.sol";
 
-contract NFTAirdrop is SpanningERC721Enumerable {
+contract NFTAirdrop is SpanningERC721 {
     using Counters for Counters.Counter;
+    using SpanningAddress for bytes32;
     
     Counters.Counter private _tokenIds;
     
-    constructor() ERC721("NFT Aidrop Demo", "NAD") {
+    constructor(address delegate_) SpanningERC721("NFT Aidrop Demo", "NAD", delegate_) {
         console.log("Contract has been deployed!");
     }
 
